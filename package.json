@@ -1,9 +1,14 @@
 {
   "name": "@superinstance/canon-graph",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fetch the Live Canon and render a navigable text graph (BFS from any paper, depth-limited). https://live-canon.superinstance.dev",
   "main": "index.js",
-  "files": ["index.js", "README.md"],
+  "files": [
+    "index.js",
+    "CANON.md",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "node test/test.js"
   },
@@ -18,10 +23,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SuperInstance/canon-graph.git"
+    "url": "git+https://github.com/SuperInstance/canon-graph.git"
   },
-  "homepage": "https://live-canon.superinstance.dev",
+  "homepage": "https://github.com/SuperInstance/canon-graph#readme",
   "engines": {
     "node": ">=18.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/SuperInstance/canon-graph/issues"
   }
 }

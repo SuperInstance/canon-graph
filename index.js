@@ -11,7 +11,42 @@ async function fetchCanon(base) {
   const url = new URL('/api/canon', base || DEFAULT_BASE);
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  return normaliseCanon(await res.json());
+}
+
+// The live service changed the SHAPE of /api/canon.
+//
+// It used to return a MAP of papers keyed by id:
+//
+//     { "paper-470.md": { id, number, title, ... }, ... }
+//
+// and it now returns a LIST under a `papers` key:
+//
+//     { "papers": [ { id, number, title, ... }, ... ] }
+//
+// The client did not follow, and it failed in a way that looked like
+// an empty canon: `Object.keys(canon).length` on the new shape
+// returns the number of TOP-LEVEL keys (2), not the number of papers,
+// so the self-test's "expected at least 70 papers" fired with "got 2"
+// while all 71 papers were sitting there in `canon.papers`.
+//
+// So: accept BOTH shapes, and always hand the caller the MAP, which is
+// what `renderGraph` iterates. A client that cannot tell the difference
+// between "the canon is empty" and "the canon is a list now" will
+// misreport the first as the second.
+function normaliseCanon(payload) {
+  if (!payload || typeof payload !== 'object') return payload;
+  if (Array.isArray(payload)) {
+    const map = {};
+    for (const p of payload) map[p.id] = p;
+    return map;
+  }
+  if (Array.isArray(payload.papers)) {
+    const map = {};
+    for (const p of payload.papers) map[p.id] = p;
+    return map;
+  }
+  return payload;
 }
 
 function renderGraph(papers, opts = {}) {
