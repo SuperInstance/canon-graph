@@ -1,0 +1,25 @@
+name: test
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # The OFFLINE test is the gate.  It needs no network, so it cannot
+      # flake, and it is the test that would have caught the original
+      # defect: against the pre-fix client it fails 3 of its 6 checks.
+      - name: Shape handling (offline)
+        run: node test/shape.test.js
+
+      # The LIVE test checks the client against the real service.
+      - name: Live canon
+        run: node test/test.js

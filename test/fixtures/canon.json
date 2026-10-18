@@ -1,0 +1,9 @@
+{
+  "_comment": "A real /api/canon response, captured 2026-10-18 and trimmed to three papers. The live service returns { papers: [...], count: N } -- it has returned that shape since the worker's first commit on 2026-09-08. The MAP form below is the shape an earlier client was written against; the client must accept both.",
+  "papers": [
+    { "id": "paper-470.md", "number": 470, "title": "F161 - Conservation Laws as Fences: The Physics of Working Animals", "f_number": 161, "phase": "vessel" },
+    { "id": "paper-471.md", "number": 471, "title": "F162 - The PLATO Room Protocol: A Cell as a Room, A Room as a Cell", "f_number": 162, "phase": "vessel" },
+    { "id": "paper-472.md", "number": 472, "title": "F163 - Sonar Vision as 5 Quilt Cells: A Vessel's Perception", "f_number": 163, "phase": "vessel" }
+  ],
+  "count": 71
+}
