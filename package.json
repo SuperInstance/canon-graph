@@ -1,6 +1,6 @@
 {
   "name": "@superinstance/canon-graph",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Fetch the Live Canon and render a navigable text graph (BFS from any paper, depth-limited). https://live-canon.superinstance.dev",
   "main": "index.js",
   "files": [
